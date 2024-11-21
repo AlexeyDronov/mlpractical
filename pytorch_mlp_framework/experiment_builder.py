@@ -153,12 +153,15 @@ class ExperimentBuilder(nn.Module):
         
         ########################################
         for layer, parameter in named_parameters:
-            layers.append(layer)
-            mean_grad = parameter.grad.mean().abs().detach().cpu().numpy()
+            if "bias" in layer:
+                continue
+            layer_name = layer.replace('.weight', '').replace('.bias', '').replace("layer_dict.", "").replace(".", "_")
+            mean_grad = parameter.grad.abs().mean().item()
+            
+            layers.append(layer_name)
             all_grads.append(mean_grad)
         
         plt = self.plot_func_def(all_grads, layers)
-        
         return plt
     
     
