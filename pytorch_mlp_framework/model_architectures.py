@@ -365,7 +365,7 @@ class BN_ConvolutionalProcessingBlock(nn.Module):
         self.layer_dict['bn_0'] = nn.BatchNorm2d(self.num_filters)
 
         out = self.layer_dict['conv_0'].forward(out)
-        out = self.layer_dict['bn_0'](out)
+        out = self.layer_dict['bn_0'].forward(out)
         out = F.leaky_relu(out)
 
         self.layer_dict['conv_1'] = nn.Conv2d(in_channels=out.shape[1], out_channels=self.num_filters, bias=self.bias,
