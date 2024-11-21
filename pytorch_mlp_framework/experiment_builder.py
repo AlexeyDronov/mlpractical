@@ -154,7 +154,8 @@ class ExperimentBuilder(nn.Module):
         ########################################
         for layer, parameter in named_parameters:
             layers.append(layer)
-            all_grads.append(parameter.mean().abs().detach().numpy())
+	    mean_grad = parameter.grad.mean().abs().detach().cpu().numpy()
+            all_grads.append(mean_grad)
         
         plt = self.plot_func_def(all_grads, layers)
         
