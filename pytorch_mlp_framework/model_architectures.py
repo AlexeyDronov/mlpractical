@@ -468,8 +468,6 @@ class BN_RC_ConvolutionalProcessingBlock(nn.Module):
         self.layer_dict = nn.ModuleDict()
         x = torch.zeros(self.input_shape)
         out = x
-        # Store the residual layer before convolution
-        residual = out
         self.layer_dict['conv_0'] = nn.Conv2d(in_channels=out.shape[1], out_channels=self.num_filters, bias=self.bias,
                                               kernel_size=self.kernel_size, dilation=self.dilation,
                                               padding=self.padding, stride=1)
@@ -478,12 +476,8 @@ class BN_RC_ConvolutionalProcessingBlock(nn.Module):
 
         out = self.layer_dict['conv_0'].forward(out)
         out = self.layer_dict['bn_0'].forward(out)
-        # Add the residual layer before the activation function
-        out = residual + out
         out = F.leaky_relu(out)
 
-        # Store the residual layer before convolution
-        residual = out
         self.layer_dict['conv_1'] = nn.Conv2d(in_channels=out.shape[1], out_channels=self.num_filters, bias=self.bias,
                                               kernel_size=self.kernel_size, dilation=self.dilation,
                                               padding=self.padding, stride=1)
@@ -491,8 +485,7 @@ class BN_RC_ConvolutionalProcessingBlock(nn.Module):
         self.layer_dict['bn_1'] = nn.BatchNorm2d(self.num_filters)
         out = self.layer_dict['conv_1'].forward(out)
         out = self.layer_dict['bn_1'].forward(out)
-        # Add the residual layer before the activation function
-        out = residual + out
+
         out = F.leaky_relu(out)
 
         print(out.shape)
