@@ -496,16 +496,12 @@ class BN_RC_ConvolutionalProcessingBlock(nn.Module):
         residual = out
         out = self.layer_dict['conv_0'].forward(out)
         out = self.layer_dict['bn_0'].forward(out)
-        # Add before activation
-        out = residual + out
         out = F.leaky_relu(out)
 
-        # Store the residual layer
-        residual = out
         out = self.layer_dict['conv_1'].forward(out)
         out = self.layer_dict['bn_1'].forward(out)
         # Add before activation
-        out = residual + out
+        out += residual
         out = F.leaky_relu(out)
 
         return out
