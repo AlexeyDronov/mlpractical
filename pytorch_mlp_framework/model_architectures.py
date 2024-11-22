@@ -483,9 +483,9 @@ class BN_RC_ConvolutionalProcessingBlock(nn.Module):
                                               padding=self.padding, stride=1)
         # Second batch normalisation layer
         self.layer_dict['bn_1'] = nn.BatchNorm2d(self.num_filters)
+
         out = self.layer_dict['conv_1'].forward(out)
         out = self.layer_dict['bn_1'].forward(out)
-
         out = F.leaky_relu(out)
 
         print(out.shape)
@@ -493,7 +493,7 @@ class BN_RC_ConvolutionalProcessingBlock(nn.Module):
     def forward(self, x):
         out = x
         # Store the residual layer
-        residual = out
+        residual = x
         out = self.layer_dict['conv_0'].forward(out)
         out = self.layer_dict['bn_0'].forward(out)
         out = F.leaky_relu(out)
