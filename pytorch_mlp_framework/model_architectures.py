@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
 class FCCNetwork(nn.Module):
     def __init__(self, input_shape, num_output_classes, num_filters, num_layers, use_bias=False):
         """
@@ -565,4 +564,4 @@ class BN_RC_ConvolutionalDimensionalityReductionBlock(nn.Module):
 
         return out
     
-  
+
