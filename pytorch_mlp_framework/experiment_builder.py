@@ -127,10 +127,10 @@ class ExperimentBuilder(nn.Module):
         plt.hlines(0, 0, len(all_grads)+1, linewidth=1, color="k" )
         # plt.xticks(range(0,len(all_grads), 1), layers, rotation="vertical")
 
-        # Set reduced ticks and corresponding labels
+        # Set reduced ticks and corresponding labels (To have a clean plot for bn_rc)
         reduced_ticks = range(0, len(layers), 2)  # Reduce number of ticks (for example, every second layer)
         plt.xticks(reduced_ticks, [layers[i] for i in reduced_ticks], rotation="vertical")
-        
+
         plt.xlim(xmin=0, xmax=len(all_grads))
         plt.xlabel("Layers")
         plt.ylabel("Average Gradient")
