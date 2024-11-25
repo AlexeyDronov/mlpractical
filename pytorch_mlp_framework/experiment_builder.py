@@ -12,6 +12,10 @@ from matplotlib import pyplot as plt
 import matplotlib
 matplotlib.rcParams.update({'font.size': 8})
 
+'''
+This file has changes in plot_func_def and a written implementation in plot_grad_flow
+'''
+
 class ExperimentBuilder(nn.Module):
     def __init__(self, network_model, experiment_name, num_epochs, train_data, val_data,
                  test_data, weight_decay_coefficient, use_gpu, continue_from_epoch=-1):
@@ -125,12 +129,14 @@ class ExperimentBuilder(nn.Module):
         """
         plt.plot(all_grads, alpha=0.3, color="b")
         plt.hlines(0, 0, len(all_grads)+1, linewidth=1, color="k" )
-        # plt.xticks(range(0,len(all_grads), 1), layers, rotation="vertical")
+        plt.xticks(range(0,len(all_grads), 1), layers, rotation="vertical")
+
+        ''' This section was used to generate a tidier plot for VGG38_BN_RC
 
         # Set reduced ticks and corresponding labels (To have a clean plot for bn_rc)
         reduced_ticks = range(0, len(layers), 2)  # Reduce number of ticks (for example, every second layer)
         plt.xticks(reduced_ticks, [layers[i] for i in reduced_ticks], rotation="vertical")
-
+        '''
         plt.xlim(xmin=0, xmax=len(all_grads))
         plt.xlabel("Layers")
         plt.ylabel("Average Gradient")
@@ -153,10 +159,6 @@ class ExperimentBuilder(nn.Module):
         """
         Complete the code in the block below to collect absolute mean of the gradients for each layer in all_grads with the             layer names in layers.
         """
-        ########################################
-        #TODO write your code here
-        
-        ########################################
         for layer, parameter in named_parameters:
             if "bias" in layer:
                 continue

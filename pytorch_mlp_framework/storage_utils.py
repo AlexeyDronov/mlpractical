@@ -1,7 +1,9 @@
 import pickle
 import os
 import csv
-
+'''
+This file was unchanged during the coursework
+'''
 
 def save_to_stats_pkl_file(experiment_log_filepath, filename, stats_dict):
     summary_filename = os.path.join(experiment_log_filepath, filename)

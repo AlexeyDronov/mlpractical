@@ -9,6 +9,10 @@ from pytorch_mlp_framework.experiment_builder import ExperimentBuilder
 from pytorch_mlp_framework.model_architectures import *
 import os 
 # os.environ["CUDA_VISIBLE_DEVICES"]="0"
+'''
+In this file, added if else statements for BN blocks and BN+RC blocks 
+in lines 54-59.
+'''
 
 args = get_args()  # get arguments from command line
 rng = np.random.RandomState(seed=args.seed)  # set the seeds for the experiment

@@ -1,6 +1,13 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+'''
+This file has 4 new classes created at the bottom:
+1. Processing block for VGG38 with Batch Normalisation
+2. Dimensionality reduction block for VGG38 with Batch Normalisation
+3. Processing block for VGG38 with Batch Normalisation and Residual Connections
+4. Dimensionality reduction block for VGG38 with Batch Normalisation and Residual Connections
+'''
 
 class FCCNetwork(nn.Module):
     def __init__(self, input_shape, num_output_classes, num_filters, num_layers, use_bias=False):
